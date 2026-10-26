@@ -108,18 +108,37 @@ its dimensions, timestamp continuity, duplicates, and missing client values.
   being executed through a Python heredoc. That attempt failed; the subsequent
   documentation update was executed and verified successfully.
 
+**Numeric-value validation — 2026-10-26**
+
+**Command executed:**
+Used pandas to parse client values as numeric and count non-numeric, negative,
+and zero readings, plus the minimum and maximum values.
+
+**Verification and actual output:**
+- Non-numeric values: 0.
+- Negative values: 0.
+- Zero-valued readings: 10,457,342.
+- Minimum value: 0.0.
+- Maximum value: 192800.0.
+
+**Explanation:**
+No non-numeric or negative client values were found after parsing.
+Zero readings are recorded as observed values, not automatically treated as errors.
+The maximum value has not yet been investigated for plausibility or units.
+
 **Result:**
-File structure, timestamp continuity, duplicate-timestamp, and missing-client-value
-checks passed. Numeric-value validity and forecasting suitability remain unverified.
+File structure, timestamp continuity, duplicate-timestamp, missing-value, and
+numeric-value checks passed. Forecasting suitability and the meaning of extreme
+values remain unverified.
 
 **GitHub checkpoint:**
 - Commit: `2914329` — `docs: record dataset timestamp validation`
 - Push status: Verified on `origin/main`.
-- Missing-value documentation updates: Pending commit and push.
+- Numeric-value validation documentation updates: Pending commit and push.
 
 **Next step:**
-Check numeric-value validity and forecasting suitability. Keep dataset validation
-in progress until the remaining checks are complete.
+Investigate the dataset's units and extreme values, and assess its suitability
+for the configured hourly forecasting task. Keep validation in progress.
 
 ## Future Entry Template
 
