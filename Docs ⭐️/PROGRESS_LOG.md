@@ -23,8 +23,8 @@
 | 6 | Review project configuration | Completed | Reviewed `configs/config.yaml`; forecast horizon is 24 hours. |
 | 7 | Inspect data directory and documentation | Completed | No actual dataset is present; expected columns are `timestamp` and `demand`. |
 | 8 | Inspect existing Git-tracked data files | Completed | `git ls-files data` returned no tracked files. |
-| 9 | Select and verify the dataset | In progress | UCI Electricity Load Diagrams 2011–2014 is the proposed source. |
-| 10 | Data exploration and validation | Pending | |
+| 9 | Select and verify the dataset | In progress | UCI Electricity Load Diagrams 2011–2014 file inspected; structure and timestamp continuity checks passed. Full data-quality validation is pending. |
+| 10 | Data exploration and validation | In progress | File dimensions and timestamp continuity checked; missing-value and numeric-value checks remain pending. |
 | 11 | Data preparation and feature engineering | Pending | |
 | 12 | Train baseline and candidate models | Pending | |
 | 13 | Evaluate models using chronological splits | Pending | |
@@ -40,7 +40,9 @@ Record each verified checkpoint below.
 
 | Checkpoint | Commit | Push status |
 |---|---|---|
-| Progress tracker creation | Pending | Pending |
+| Progress tracker and initial diary | `ae5acb4` | Pushed to `origin/main` |
+| Environment verification documentation | `5f18652` | Pushed to `origin/main` |
+| Dataset file and timestamp validation documentation | Pending | Pending |
 
 ## Important Rules
 
