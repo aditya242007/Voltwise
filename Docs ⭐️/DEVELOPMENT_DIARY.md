@@ -246,3 +246,61 @@ Copy this section for each new implementation step.
 - Push status:
 
 **Next step:**
+
+### Entry 5 — Full-Series Audit and Pipeline Review
+
+**Date:** 2026-10-26
+
+**Status:** Initial full-series data-quality checks verified; forecasting decisions remain pending.
+
+**Objective:**
+Validate the complete raw dataset and inspect the existing data-loading, validation, forecasting, and feature-engineering code before selecting a forecasting target.
+
+**Files inspected:**
+- `data/raw/LD2011_2014.txt` (read-only)
+- `configs/config.yaml`
+- `src/voltwise/data/load_data.py`
+- `src/voltwise/data/validate_data.py`
+- `src/voltwise/pipelines/forecasting.py`
+- `src/voltwise/features/build_features.py`
+- `notebooks/02_data_preparation.ipynb`
+
+**Full-series audit — verified output:**
+- Dataset shape: 140,256 rows × 371 columns.
+- Client series: 370.
+- First timestamp: `2011-01-01 00:15:00`.
+- Last timestamp: `2015-01-01 00:00:00`.
+- Invalid timestamps: 0.
+- Duplicate timestamps: 0.
+- Missing expected 15-minute timestamps: 0.
+- Missing client readings: 0.
+- Non-numeric readings after parsing with `decimal=','`: 0.
+- Negative readings: 0.
+- Zero readings: 10,457,342.
+- A follow-up timestamp-only check confirmed strictly increasing timestamps, 140,255 consecutive 15-minute intervals, zero unexpected intervals, and a maximum interval of 15 minutes.
+
+**Command issue and correction:**
+- An initial shell paste merged some Python lines. Its `~ts.is_monotonic_increasing` output was not a valid count of out-of-order timestamps.
+- A separate timestamp-only check corrected this and verified monotonic ordering and interval continuity.
+- NumPy timedelta deprecation warnings appeared during the interval check; the command still returned the expected interval results.
+
+**Pipeline review findings:**
+- `load_csv()` uses default `pd.read_csv()` settings; it does not currently configure the raw dataset's semicolon delimiter or decimal comma.
+- `validate_demand_data()` checks required columns, parseable timestamps, ascending order, and numeric non-missing target values. It does not currently check duplicate timestamps or interval continuity.
+- `prepare_forecasting_data()` validates the supplied frame and calls `build_features()`; it does not load the raw dataset or aggregate it to hourly frequency.
+- `build_features()` creates hour, day-of-week, month, one-row lag, and a rolling mean over 24 rows. The rolling window represents 24 hours only when the input has a consistent hourly frequency.
+- `configs/config.yaml` specifies `timezone: UTC`, but a search of the application source found no explicit timezone conversion logic.
+- `notebooks/02_data_preparation.ipynb` contains no cells yet.
+
+**Limitations and pending decisions:**
+- Zero readings have been counted but have not been classified as valid zero demand, inactivity, or another condition.
+- Timestamp continuity alone does not resolve the source's local-time and daylight-saving-time conventions.
+- The final forecasting target (single client, selected clients, or aggregate demand) remains undecided.
+- Hourly aggregation, target units, timezone/DST policy, extreme-value interpretation, and forecasting suitability remain pending.
+- The raw dataset was not modified.
+
+**Result:** Initial full-series structure, timestamp, and numeric-value checks verified. The final forecasting dataset and time-handling policy have not yet been established.
+
+**GitHub checkpoint:** Pending review, commit, and push.
+
+**Next step:** Investigate the source time convention, daylight-saving-time treatment, measurement units, and forecasting target before implementing data preparation.

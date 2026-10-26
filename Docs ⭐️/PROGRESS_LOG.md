@@ -23,9 +23,9 @@
 | 6 | Review project configuration | Completed | Reviewed `configs/config.yaml`; forecast horizon is 24 hours. |
 | 7 | Inspect data directory and documentation | Completed | UCI raw dataset is present in data/raw/ and is intentionally kept out of Git; expected processed columns are timestamp and demand. |
 | 8 | Inspect existing Git-tracked data files | Completed | `git ls-files data` returned no tracked files. |
-| 9 | Select and verify the dataset | In progress | UCI Electricity Load Diagrams 2011–2014 file inspected; structure and timestamp continuity checks passed. Full data-quality validation is pending. |
+| 9 | Select and verify the dataset | In progress | UCI dataset structure and 15-minute timestamp continuity verified across 140,256 rows; units, target selection, and time convention still require investigation. |
 
-| 10 | Data exploration and validation | In progress | Raw data checks and preliminary MT_345 sample EDA completed, including hourly averages, weekday/weekend and day-of-week comparisons, daily averages, and coverage checks. Full-series EDA, target units, timezone/DST handling, and forecasting suitability remain pending. |
+| 10 | Data exploration and validation | In progress | Preliminary MT_345 sample EDA and full-series structural, timestamp, missing-value, and numeric checks recorded in DEVELOPMENT_DIARY.md. Target definition, timezone/DST treatment, extreme values, and forecasting suitability remain pending. |
 
 | 11 | Data preparation and feature engineering | Pending | |
 | 12 | Train baseline and candidate models | Pending | |
