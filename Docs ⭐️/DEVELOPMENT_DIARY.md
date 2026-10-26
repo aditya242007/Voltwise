@@ -140,38 +140,6 @@ values remain unverified.
 Investigate the dataset's units and extreme values, and assess its suitability
 for the configured hourly forecasting task. Keep validation in progress.
 
-## Future Entry Template
-
-Copy this section for each new implementation step.
-
-### Entry N — [Step Name]
-
-**Date:**
-
-**Objective:**
-
-**Files created or modified:**
-
-**Commands executed:**
-
-**Implementation / code:**
-
-**Explanation:**
-- What the code does.
-- Why the approach was selected.
-- Important parameters or assumptions.
-
-**Verification and actual output:**
-
-**Errors encountered and fixes:**
-
-**Result:** Pending verification
-
-**GitHub checkpoint:**
-- Commit:
-- Push status:
-
-**Next step:**
 
 ### Entry 3 — Preliminary Notebook-Based Data Exploration
 
@@ -206,3 +174,75 @@ Copy this section for each new implementation step.
 **GitHub checkpoint:** Pending documentation review, commit, and push.
 
 **Next step:** Continue systematic EDA and resolve target and time-handling decisions using verified evidence.
+
+
+
+### Entry 4 — Hourly and Calendar-Pattern Exploration
+
+**Date:** 2026-10-26
+
+**Status:** Preliminary sample-based exploration verified; full-series EDA remains pending.
+
+**Objective:**
+Explore hourly, daily, weekday/weekend, and day-of-week patterns for the candidate client MT_345.
+
+**Implementation and verification:**
+- Resampled 15-minute readings into hourly average power using `resample("h").mean()`.
+- Calculated average power by hour of day.
+- Compared weekday and weekend average power.
+- Calculated average power for each day of the week.
+- Calculated daily average power and checked hourly coverage for each date.
+
+**Verified results:**
+- The plotted sample covers `2012-12-30 04:00:00` through `2013-01-09 13:45:00`.
+- Hour-of-day averages were lowest around 04:00–05:00 and highest around 18:00 in this sample.
+- Weekday mean power: approximately 1923.10 kW across 182 hourly observations.
+- Weekend mean power: approximately 2222.60 kW across 68 hourly observations.
+- Sunday had the highest day-of-week mean in this sample (approximately 2240.26 kW); Tuesday had the lowest (approximately 1766.33 kW).
+- Daily coverage included 9 dates with 24 hourly observations, plus 2 partial dates: 20 hours on 2012-12-30 and 14 hours on 2013-01-09.
+
+**Limitations:**
+- Results are based on a sample of 1000 consecutive 15-minute readings, not the full dataset.
+- The first and last calendar dates are partial and should not be directly compared with complete days without accounting for coverage.
+- The patterns are descriptive and do not establish statistically reliable daily or weekly seasonality.
+- MT_345 remains an exploratory candidate, not the final forecasting target.
+- Final target definition, hourly aggregation, timezone/DST handling, and full-series data suitability remain unresolved.
+
+**Result:** Preliminary hourly and calendar-pattern exploration verified.
+
+**GitHub checkpoint:** Pending documentation review, commit, and push.
+
+**Next step:** Update the Progress Log, verify the documentation diff, commit only the intended documentation files, and continue systematic full-series EDA.
+
+## Future Entry Template
+
+Copy this section for each new implementation step.
+
+### Entry N — [Step Name]
+
+**Date:**
+
+**Objective:**
+
+**Files created or modified:**
+
+**Commands executed:**
+
+**Implementation / code:**
+
+**Explanation:**
+- What the code does.
+- Why the approach was selected.
+- Important parameters or assumptions.
+
+**Verification and actual output:**
+
+**Errors encountered and fixes:**
+
+**Result:** Pending verification
+
+**GitHub checkpoint:**
+- Commit:
+- Push status:
+
+**Next step:**
