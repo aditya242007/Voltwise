@@ -1,0 +1,52 @@
+# Voltwise — Project Progress Log
+
+**Project:** Short-Term Electricity Demand Forecasting using Machine Learning
+**Tagline:** Predict smarter. Power better.
+
+## Workflow
+
+1. Complete one project step.
+2. Run and verify the implementation.
+3. Update this progress log.
+4. Commit and push the completed work to GitHub.
+5. Proceed only after verification.
+
+## Progress Tracker
+
+| Step | Task | Status | Notes |
+|---|---|---|---|
+| 1 | Inspect repository and existing files | Completed | Existing files and uncommitted changes identified. |
+| 2 | Create Python virtual environment | Completed | `.venv` created. |
+| 3 | Install project dependencies | Completed | `requirements.txt` installation succeeded. |
+| 4 | Verify package imports | Pending verification | Corrected the Bash history-expansion issue; final output not yet confirmed. |
+| 5 | Review product requirements | Completed | Reviewed `PRD.md`; dataset and evaluation decisions remain open. |
+| 6 | Review project configuration | Completed | Reviewed `configs/config.yaml`; forecast horizon is 24 hours. |
+| 7 | Inspect data directory and documentation | Completed | No actual dataset is present; expected columns are `timestamp` and `demand`. |
+| 8 | Inspect existing Git-tracked data files | Completed | `git ls-files data` returned no tracked files. |
+| 9 | Select and verify the dataset | In progress | UCI Electricity Load Diagrams 2011–2014 is the proposed source. |
+| 10 | Data exploration and validation | Pending | |
+| 11 | Data preparation and feature engineering | Pending | |
+| 12 | Train baseline and candidate models | Pending | |
+| 13 | Evaluate models using chronological splits | Pending | |
+| 14 | Build the forecasting pipeline | Pending | |
+| 15 | Build the dashboard | Pending | |
+| 16 | Build and test the API | Pending | |
+| 17 | Add automated tests and CI checks | Pending | |
+| 18 | Final documentation and project review | Pending | |
+
+## GitHub Checkpoints
+
+Record each verified checkpoint below.
+
+| Checkpoint | Commit | Push status |
+|---|---|---|
+| Progress tracker creation | Pending | Pending |
+
+## Important Rules
+
+- Preserve existing project files and user changes.
+- Never commit secrets, `.env` files, or restricted/private datasets.
+- Verify each step before marking it completed.
+- Update this log at every verified checkpoint.
+- Commit and push only the intended files for that checkpoint.
+- Do not claim a push succeeded unless Git confirms it.
