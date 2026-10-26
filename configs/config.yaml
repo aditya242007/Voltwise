@@ -1,0 +1,16 @@
+project:
+  name: Voltwise
+  timezone: UTC
+data:
+  path: data/processed/demand.csv
+  timestamp_column: timestamp
+  target_column: demand
+  frequency: 1h
+forecast:
+  horizon: 24
+  test_fraction: 0.2
+  random_state: 42
+artifacts:
+  models_dir: artifacts/models
+  metrics_dir: artifacts/metrics
+  figures_dir: reports/figures

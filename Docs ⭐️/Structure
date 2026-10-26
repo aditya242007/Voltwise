@@ -1,0 +1,131 @@
+For Voltwise — Predictive Energy Intelligence, I recommend a production-style project structure that is still manageable for a student. It should support your INT234 Predictive Analytics assignment, a strong data-role portfolio, and future expansion.
+
+## Recommended project structure
+
+```
+Voltwise/
+│
+├── app.py                         # Streamlit application entry point
+├── README.md                      # Project overview and setup guide
+├── PRD.md                         # Product requirements
+├── requirements.txt               # Python dependencies
+├── .gitignore                     # Files Git should ignore
+├── .env.example                   # Example environment variables
+├── Dockerfile                     # Optional container configuration
+│
+├── configs/
+│   └── config.yaml                # Project and model configuration
+│
+├── data/
+│   ├── README.md                  # Dataset source and instructions
+│   ├── raw/                       # Original downloaded data
+│   ├── interim/                   # Intermediate cleaned data
+│   └── processed/                 # Model-ready datasets
+│
+├── notebooks/
+│   ├── 01_data_exploration.ipynb  # Exploratory data analysis
+│   ├── 02_data_preparation.ipynb  # Cleaning and preprocessing
+│   ├── 03_feature_engineering.ipynb
+│   └── 04_model_experiments.ipynb
+│
+├── src/
+│   └── voltwise/
+│       ├── __init__.py
+│       ├── data/
+│       │   ├── load_data.py       # Load electricity data
+│       │   └── validate_data.py   # Validate schema and timestamps
+│       │
+│       ├── features/
+│       │   └── build_features.py  # Lags, rolling statistics, calendar features
+│       │
+│       ├── models/
+│       │   ├── train.py           # Train candidate models
+│       │   ├── predict.py         # Generate forecasts
+│       │   └── evaluate.py        # Evaluate model performance
+│       │
+│       ├── pipelines/
+│       │   └── forecasting.py     # Reusable forecasting workflow
+│       │
+│       └── utils/
+│           ├── config.py          # Configuration loader
+│           └── logging.py         # Application logging
+│
+├── artifacts/
+│   ├── models/                    # Saved fitted models
+│   └── metrics/                   # Evaluation results
+│
+├── reports/
+│   └── figures/                   # EDA and evaluation plots
+│
+├── dashboard/
+│   ├── pages/
+│   │   ├── 1_Demand_Overview.py
+│   │   ├── 2_Load_Forecasting.py
+│   │   ├── 3_Model_Comparison.py
+│   │   └── 4_Model_Performance.py
+│   └── components/
+│       ├── charts.py              # Reusable Plotly charts
+│       └── metrics.py             # KPI components
+│
+├── api/
+│   ├── main.py                    # FastAPI application
+│   └── schemas.py                 # Request/response validation
+│
+├── tests/
+│   ├── test_data_validation.py
+│   ├── test_features.py
+│   ├── test_forecasting.py
+│   └── test_api.py
+│
+└── .github/
+    └── workflows/
+        └── ci.yml                 # Automated tests and CI
+```
+
+## How the components work together
+
+Electricity demand dataset
+
+Historical hourly consumption
+
+Data preparation and feature engineering
+
+Cleaning · timestamps · lag features · calendar features
+
+Model training and evaluation
+
+Baseline · Linear Regression · Random Forest · XGBoost
+
+Saved forecasting pipeline
+
+Model artifact · feature definitions · evaluation metrics
+
+Streamlit
+
+Interactive dashboard
+
+FastAPI
+
+Forecast API
+
+## What you should build first
+
+Don't create every file immediately. Develop in this order:
+
+| Phase         | Deliverable                                           |
+| ------------- | ----------------------------------------------------- |
+| 1. Foundation | Repository, PRD, dataset, dependencies                |
+| 2. Analytics  | Data cleaning, EDA, feature engineering               |
+| 3. ML         | Baseline, model comparison, chronological validation  |
+| 4. Dashboard  | Demand overview, 24-hour forecast, performance charts |
+| 5. API        | FastAPI forecast endpoint and input validation        |
+| 6. Quality    | Tests, GitHub Actions, README                         |
+| 7. Deployment | Public demo and reproducible setup                    |
+
+### Three important design decisions
+
+- Keep notebooks for exploration, but put reusable production code in `src/voltwise/`.
+- Never commit large datasets, secrets, or unnecessary model binaries to Git. Document how to obtain the data and generate artifacts.
+- Prevent forecasting leakage: all lag and rolling features must use only information available at the forecast origin. Use chronological evaluation rather than random train/test splitting.
+
+My recommendation is to begin with a working ML pipeline and Streamlit dashboard. Add FastAPI and deployment after the forecasts are reliable. That way, Voltwise will have a strong predictive analytics foundation before you invest time in the more advanced engineering features.
