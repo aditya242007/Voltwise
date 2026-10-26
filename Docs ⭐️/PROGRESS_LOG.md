@@ -24,7 +24,7 @@
 | 7 | Inspect data directory and documentation | Completed | UCI raw dataset is present in data/raw/ and is intentionally kept out of Git; expected processed columns are timestamp and demand. |
 | 8 | Inspect existing Git-tracked data files | Completed | `git ls-files data` returned no tracked files. |
 | 9 | Select and verify the dataset | In progress | UCI Electricity Load Diagrams 2011–2014 file inspected; structure and timestamp continuity checks passed. Full data-quality validation is pending. |
-| 10 | Data exploration and validation | In progress | Dimensions, timestamp continuity, missing values, and numeric-value checks completed; units, extreme-value interpretation, and forecasting suitability remain pending. |
+| 10 | Data exploration and validation | In progress | Raw structure, timestamp continuity, missing values, and numeric parsing checked. Preliminary notebook EDA and an MT_345 sample plot completed; full-series patterns, target units, timezone/DST handling, and forecasting suitability remain pending. |
 | 11 | Data preparation and feature engineering | Pending | |
 | 12 | Train baseline and candidate models | Pending | |
 | 13 | Evaluate models using chronological splits | Pending | |
@@ -42,7 +42,8 @@ Record each verified checkpoint below.
 |---|---|---|
 | Progress tracker and initial diary | `ae5acb4` | Pushed to `origin/main` |
 | Environment verification documentation | `5f18652` | Pushed to `origin/main` |
-| Dataset file and timestamp validation documentation | `2914329` | Pushed to `origin/main` |
+| Dataset file and timestamp validation documentation | `2914329` | Pushed to
+`origin/main` | Preliminary notebook-based EDA documentation | Pending | Not yet committed |
 
 ## Important Rules
 

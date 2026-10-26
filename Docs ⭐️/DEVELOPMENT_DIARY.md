@@ -172,3 +172,37 @@ Copy this section for each new implementation step.
 - Push status:
 
 **Next step:**
+
+### Entry 3 — Preliminary Notebook-Based Data Exploration
+
+**Date:** 2026-10-26
+
+**Status:** Preliminary sample-based exploration verified; full EDA remains in progress.
+
+**Objective:** Begin exploring the UCI Electricity Load Diagrams 2011–2014 dataset in the existing `notebooks/01_data_exploration.ipynb` notebook without modifying the raw data.
+
+**Implementation and verification:**
+- Loaded a 10-row, 6-column sample. The timestamp column appeared as `Unnamed: 0`; client columns included `MT_001` through `MT_005`.
+- Converted timestamps to pandas datetime values. The sample had no missing values, timestamps were increasing, and all nine time differences were 15 minutes.
+- The first five client columns had zero readings in the initial 10-row sample and in a later 10-row sample. This does not establish that these clients are always zero.
+- Examined 100 rows across all 370 clients. In that sample, 329 clients had at least 90% non-zero readings, while 39 had no non-zero readings.
+- Plotted 1,000 consecutive readings for `MT_345`, from `2012-12-30 04:00:00` to `2013-01-09 13:45:00`.
+- For this `MT_345` sample, the mean was `2004.560386`, median `2193.236715`, minimum `753.623188`, and maximum `3618.357488`. There were no missing or zero readings, and all 999 timestamp intervals were 15 minutes.
+- The plot showed a repeating rise-and-fall pattern worth further investigation. Daily or weekly seasonality has not yet been statistically confirmed.
+
+**Errors and fixes:**
+- Matplotlib was initially missing from the notebook environment; installation enabled plotting.
+- A `read_csv` call mixing integer and string entries in `usecols` failed. Using integer column positions resolved the error.
+- NumPy emitted deprecation warnings during an earlier time-window check; the command still completed.
+
+**Limitations and pending decisions:**
+- These notebook checks are preliminary and sample-based; they do not replace full-series EDA.
+- `MT_345` is only an exploration candidate, not the final forecasting target.
+- Target units, hourly aggregation, timezone/daylight-saving-time treatment, extreme-value interpretation, and forecasting suitability remain under investigation.
+- The raw dataset was read only and was not modified.
+
+**Result:** Preliminary notebook exploration verified; full EDA remains in progress.
+
+**GitHub checkpoint:** Pending documentation review, commit, and push.
+
+**Next step:** Continue systematic EDA and resolve target and time-handling decisions using verified evidence.
