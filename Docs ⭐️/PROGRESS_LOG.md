@@ -23,9 +23,9 @@
 | 6 | Review project configuration | Completed | Reviewed `configs/config.yaml`; forecast horizon is 24 hours. |
 | 7 | Inspect data directory and documentation | Completed | UCI raw dataset is present in data/raw/ and is intentionally kept out of Git; expected processed columns are timestamp and demand. |
 | 8 | Inspect existing Git-tracked data files | Completed | `git ls-files data` returned no tracked files. |
-| 9 | Select and verify the dataset | In progress | UCI dataset structure and 15-minute timestamp continuity verified across 140,256 rows; units, target selection, and time convention still require investigation. |
+| 9 | Select and verify the dataset | In progress | Dataset structure and 15-minute timestamp continuity verified; combined demand across all 370 clients selected. Time handling and DST policy remain unresolved. |
 
-| 10 | Data exploration and validation | In progress | Preliminary MT_345 sample EDA and full-series structural, timestamp, missing-value, and numeric checks recorded in DEVELOPMENT_DIARY.md. Target definition, timezone/DST treatment, extreme values, and forecasting suitability remain pending. |
+| 10 | Data exploration and validation | In progress | Preliminary MT_345 EDA and full-series quality checks documented. Combined-demand target selected; zero/extreme-value interpretation, time handling, and forecasting suitability remain to be assessed. |
 
 | 11 | Data preparation and feature engineering | Pending | |
 | 12 | Train baseline and candidate models | Pending | |
@@ -46,7 +46,8 @@ Record each verified checkpoint below.
 | Environment verification documentation | `5f18652` | Pushed to `origin/main` |
 | Dataset file and timestamp validation documentation | `2914329` | Pushed to `origin/main` |
 | Preliminary notebook-based EDA documentation | `40317a1` | Pushed to `origin/main` |
-| Preliminary hourly and calendar-pattern EDA documentation | Pending | Not yet committed |
+| Full-series audit and pipeline review documentation | `31f5a45` | Pushed to `origin/main` |
+| Forecasting target and preparation design documentation | Pending | Not yet committed |
 
 ## Important Rules
 

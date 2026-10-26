@@ -304,3 +304,58 @@ Validate the complete raw dataset and inspect the existing data-loading, validat
 **GitHub checkpoint:** Pending review, commit, and push.
 
 **Next step:** Investigate the source time convention, daylight-saving-time treatment, measurement units, and forecasting target before implementing data preparation.
+
+
+### Entry 6 — Forecasting Target and Preparation Design
+
+**Date:** 2026-10-26
+
+**Status:** Target selected; preparation design proposed, not implemented.
+
+**Objective:**
+Resolve the initial forecasting target and document the proposed path from the raw UCI dataset to model-ready hourly demand.
+
+**Decision:**
+- Forecast combined demand across all 370 clients.
+- Retain the configured 24-hour forecast horizon.
+- Use hourly average power in kW as the proposed target.
+- Keep the raw dataset unchanged and excluded from Git.
+
+**Proposed preparation workflow:**
+1. Load the source using its semicolon delimiter and decimal-comma format.
+2. Validate timestamps and client readings before aggregation.
+3. Sum all 370 client readings at each 15-minute timestamp to calculate combined power.
+4. Average each complete group of four consecutive 15-minute combined-power readings to calculate hourly average power in kW.
+5. Validate the resulting hourly series before feature engineering.
+6. Build lag, rolling, and calendar features on the hourly series, then evaluate forecasts with chronological splits.
+
+**Files inspected:**
+- `README.md`
+- `PRD.md`
+- `data/README.md`
+- `configs/config.yaml`
+- `src/voltwise/data/load_data.py`
+- `src/voltwise/data/validate_data.py`
+- `src/voltwise/pipelines/forecasting.py`
+- `src/voltwise/features/build_features.py`
+- `tests/test_features.py`
+
+**Verified findings:**
+- The source contains 370 client series and 140,256 timestamps at 15-minute intervals.
+- The current loader uses default CSV parsing and is not configured for the raw source format.
+- The current validator checks required columns, timestamp parsing and ordering, and numeric non-missing target values.
+- The current forecasting pipeline does not aggregate raw readings to hourly frequency.
+- A 24-row rolling window represents 24 hours only when the input is hourly.
+
+**Unresolved before implementation:**
+- Confirm the source's local-time and daylight-saving-time policy and determine the appropriate timestamp representation.
+- Decide how to handle incomplete hourly groups, even though the timestamp audit found no missing 15-minute intervals.
+- Investigate zero readings and extreme values before assigning meaning to them.
+- Define forecasting baselines, evaluation windows, and acceptable metrics.
+- Confirm that the aggregation and validation rules are covered by automated tests.
+
+**Result:** Combined demand across all 370 clients is the selected forecasting target. Hourly average power in kW is the proposed output. No implementation changes were made in this step.
+
+**GitHub checkpoint:** Pending review, commit, and push.
+
+**Next step:** Finalize time handling and aggregation rules, then implement and test data preparation.
